@@ -83,7 +83,7 @@ public class GitUtil {
         GitTag tagInfo = new GitTag();
         String[] infos = ref.getName().split("/");
         tagInfo.setTagName(infos[2]);
-        tagInfo.setCreateTime(DateFormatUtil.DEFAULT_FORMAT.format(commit.getCommitTime()*1000));
+        tagInfo.setCreateTime(DateFormatUtil.DEFAULT_FORMAT.format(commit.getCommitTime()*1000L));
         tagInfo.setRemark("【Tag解析失败】"+commit.getShortMessage());
         tagInfo.setCreateBy(Optional.ofNullable(commit.getCommitterIdent()).map(PersonIdent::getName).orElse(""));
         return tagInfo;
