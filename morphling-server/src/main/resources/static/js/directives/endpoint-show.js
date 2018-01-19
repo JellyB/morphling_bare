@@ -7,7 +7,7 @@ app.controller('EndpointShowController', ['dbUtils', '$scope', function (dbUtils
 app.directive('endpointShow', ['dbUtils', '$compile', function (dbUtils, $compile) {
     return {
         restrict: 'EA',
-        template: "<span ng-controller='EndpointShowController'  data-html=\"true\" tooltip-placement=\"left\" tooltip-html-unsafe=\"{{endpointEllipsis}}\"  ng-click='showEndpoint()'>" +
+        template: "<span ng-controller='EndpointShowController'  data-html=\"true\" tooltip-placement=\"left\" tooltip-html-unsafe=\"<p style='word-break:break-all;'>{{endpointEllipsis}}</p>\"  ng-click='showEndpoint()'>" +
         "<span ng-transclude></span>" +
         "</span>",
         replace: true,
