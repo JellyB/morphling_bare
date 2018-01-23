@@ -7,7 +7,8 @@ package com.huatu.morphling.common.enums;
  */
 public enum AppServiceType {
     GATEWAY((byte)1,"网关"),
-    SERVICE((byte)2,"服务");
+    SERVICE((byte)2,"服务"),
+    NORMAL((byte)3,"普通应用");
     private final byte code;
     private final String description;
     AppServiceType(byte code,String description){
