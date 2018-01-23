@@ -20,6 +20,12 @@
     4. mkdir /app
     5. chown -R deploy:deploy /app
     6. yum -y install wget
+    7. 修改文件打开数
+        vi /etc/security/limits.d/90-nproc.conf
+        --------------------------------------
+        *          soft    nproc     10240
+        *          hard    nproc     10240
+        --------------------------------------
 </pre>
                 </div>
                 <div class="form-body" style="padding:15px;">
