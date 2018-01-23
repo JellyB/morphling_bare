@@ -20,13 +20,26 @@
     4. mkdir /app
     5. chown -R deploy:deploy /app
     6. yum -y install wget
-    7. 修改文件打开数
-        vi /etc/security/limits.d/90-nproc.conf
-        --------------------------------------
-        *          soft    nproc     10240
-        *          hard    nproc     10240
-        --------------------------------------
+    8.
 </pre>
+<pre>
+    #centos6修改所有用户的文件打开数和进程数
+    vi /etc/security/limits.d/90-nproc.conf
+    #centos7修改所有用户的文件打开数和进程数
+    vi /etc/security/limits.d/20-nproc.conf
+    * soft nproc 10240
+    * hard nproc 10240
+    * soft nofile 10240
+    * hard nofile 10240
+
+    #只修改deploy用户的文件打开数和进程数
+    vi /etc/security/limits.conf
+    deploy soft nproc 10240
+    deploy hard nproc 10240
+    deploy soft nofile 10240
+    deploy hard nofile 10240
+</pre>
+
                 </div>
                 <div class="form-body" style="padding:15px;">
                     <div class="row">
