@@ -21,5 +21,7 @@ public class AppInstanceVO {
     private byte status;
     private Date updateTime;
 
+    private boolean registEnabled;
     private boolean registStatus;
+
 }

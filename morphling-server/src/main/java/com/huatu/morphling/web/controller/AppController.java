@@ -168,6 +168,7 @@ public class AppController {
                 instances.parallelStream().forEach(instance -> {
                     boolean health = checkerRef.health(app.getName(), instance.getHost(), instance.getPort(),
                             envService.getEnvs().get(app.getEnv()).getProperties());
+                    instance.setRegistEnabled(true);
                     instance.setRegistStatus(health);
                 });
             }

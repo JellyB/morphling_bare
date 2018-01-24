@@ -48,6 +48,9 @@ app.controller('DeployController', ['$scope','$rootScope','$modal','$state','$st
                 return "<span class='badge ' ng-class='{0:\"bg-dark\",1:\"bg-success\",2:\"bg-danger\"}[monitor.status["+row.id+"]]'>{{{0:\"待部署\",1:\"运行中\",2:\"已停止\"}[monitor.status["+row.id+"]]}}</span>"
             }},
             {name:"注册中心状态",field:"registStatus",compile:true,formatter:function(value,row){
+                if(!row.registEnabled){
+                    return "--";
+                }
                 $scope.monitor['registStatus'][row.id] = row.registStatus;//首次初始化该状态
                 if(!row.registStatus){
                     $scope.offlineCount+=1;

@@ -104,7 +104,7 @@ public class SimpleHealthCheckTask {
                 } catch(Exception e){
                     if(instance.getStatus() == InstanceStatus.RUNNING.getCode()
                             && instance.getUpdateTime() != null
-                            && (TimestampUtil.currentUnixTimeStamp() - (instance.getUpdateTime().getTime()/1000)) > 120){//启动超过2分钟
+                            && (TimestampUtil.currentUnixTimeStamp() - (instance.getUpdateTime().getTime()/1000)) > 300){//启动超过5分钟
                         errorInfo = ExceptionUtils.getStackTrace(e);
                     }
                 }
