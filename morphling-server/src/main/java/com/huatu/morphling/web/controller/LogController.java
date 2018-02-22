@@ -5,7 +5,7 @@ import com.huatu.morphling.common.enums.OperateType;
 import com.huatu.morphling.dao.jpa.entity.ShellLog;
 import com.huatu.morphling.service.local.OperateLogService;
 import com.huatu.morphling.service.local.ShellLogService;
-import com.huatu.morphling.utils.date.DateFormatUtil;
+import com.huatu.common.utils.date.DateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

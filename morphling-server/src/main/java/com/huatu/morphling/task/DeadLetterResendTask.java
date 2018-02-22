@@ -2,10 +2,10 @@ package com.huatu.morphling.task;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.huatu.common.utils.collection.HashMapBuilder;
 import com.huatu.morphling.dao.jpa.entity.Env;
 import com.huatu.morphling.service.local.EnvService;
 import com.huatu.morphling.service.local.UserService;
-import com.huatu.morphling.utils.collection.HashMapBuilder;
 import com.huatu.tiku.common.consts.RabbitConsts;
 import com.rabbitmq.client.*;
 import freemarker.template.Template;

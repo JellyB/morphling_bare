@@ -58,9 +58,8 @@
             <version>${default.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.huatu</groupId>
-            <artifactId>morphling-utils</artifactId>
-            <version>${default.version}</version>
+            <groupId>com.huatu.commons</groupId>
+            <artifactId>common-utils</artifactId>
         </dependency>
 
         <!--数据库-->

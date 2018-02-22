@@ -1,6 +1,6 @@
 package com.huatu.morphling.common.bean;
 
-import com.huatu.morphling.utils.pattern.RegexConst;
+import com.huatu.common.utils.pattern.RegexConst;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;

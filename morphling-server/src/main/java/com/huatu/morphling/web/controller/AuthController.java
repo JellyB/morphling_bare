@@ -10,7 +10,7 @@ import com.huatu.morphling.dao.jpa.entity.User;
 import com.huatu.morphling.service.local.UserService;
 import com.huatu.morphling.spring.resolver.UserSession;
 import com.huatu.morphling.spring.security.CaptchaInvalidException;
-import com.huatu.morphling.utils.web.RequestUtil;
+import com.huatu.common.utils.web.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;

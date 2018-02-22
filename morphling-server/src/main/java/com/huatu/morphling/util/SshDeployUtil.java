@@ -4,9 +4,9 @@ import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.SCPOutputStream;
 import ch.ethz.ssh2.Session;
+import com.huatu.common.utils.encode.CharsetConsts;
 import com.huatu.morphling.bean.ExecResult;
 import com.huatu.morphling.consts.DeployConst;
-import com.huatu.morphling.utils.encode.CharsetConsts;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

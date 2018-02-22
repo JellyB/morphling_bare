@@ -17,7 +17,7 @@ import com.huatu.morphling.spring.resolver.UserSession;
 import com.huatu.morphling.util.EchoFunction;
 import com.huatu.morphling.util.SshDeployUtil;
 import com.huatu.morphling.util.WebsocketEcho;
-import com.huatu.morphling.utils.code.IdCenter;
+import com.huatu.common.utils.code.IdCenter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

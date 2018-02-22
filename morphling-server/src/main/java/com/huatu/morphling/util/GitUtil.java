@@ -1,7 +1,7 @@
 package com.huatu.morphling.util;
 
+import com.huatu.common.utils.date.DateFormatUtil;
 import com.huatu.morphling.common.bean.GitTag;
-import com.huatu.morphling.utils.date.DateFormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;

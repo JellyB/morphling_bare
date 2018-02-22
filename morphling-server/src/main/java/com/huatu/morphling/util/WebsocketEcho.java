@@ -1,6 +1,6 @@
 package com.huatu.morphling.util;
 
-import com.huatu.morphling.utils.web.ANSIUtil;
+import com.huatu.common.utils.web.ANSIUtil;
 import com.huatu.morphling.web.socket.LogSubscriberHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.TextMessage;
