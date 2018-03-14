@@ -72,10 +72,10 @@ spring:
 
   mail:
     default-encoding: UTF-8
-    host: mail.huatu.com
+    host: smtp.163.com
     port: 25
-    username: zhuantiku@huatu.com
-    password: ztk@2015
+    username: han_notice@163.com
+    password: a000000
 
 logging:
   config: "classpath:config/log4j2-${spring.profiles.active}.xml"
