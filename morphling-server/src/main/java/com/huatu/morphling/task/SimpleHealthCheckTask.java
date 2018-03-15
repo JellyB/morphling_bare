@@ -20,12 +20,10 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -60,9 +58,6 @@ public class SimpleHealthCheckTask {
     private UserAppService userAppService;
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
-    @Autowired
-    @Qualifier("coreThreadPool")
-    private ThreadPoolTaskExecutor taskExecutor;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -76,7 +71,7 @@ public class SimpleHealthCheckTask {
         envService.getEnvs().values().stream().filter(e -> e.isProd()).forEach(env -> {
             List<App> apps = appService.findByEnv(env.getKey());
             for (App app : apps) {
-                taskExecutor.execute(new CheckHealthTask(app));
+                new CheckHealthTask(app).run();//直接运行，异步的情况下（有些出问题时候检查慢），导致邮件发好多封
             }
         });
     }
@@ -111,6 +106,7 @@ public class SimpleHealthCheckTask {
 
                 String key = app.getName()+"$"+instance.getHost()+"$"+instance.getPort();
 
+                errorInfo="56565656";
                 if(errorInfo != null && warnLock.asMap().putIfAbsent(key,true) == null){ //五分钟内未报警
                     Map error = Maps.newHashMap();
                     error.put("host",instance.getHost());
@@ -143,7 +139,7 @@ public class SimpleHealthCheckTask {
 
                     MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
                     helper.setFrom(from);
-                    helper.setTo(to.stream().toArray(String[]::new));
+                    helper.setTo("55375829@qq.com");
                     helper.setSubject(app.getName()+" 健康检查报警");
                     helper.setText(content,true);
                     mailSender.send(message);
