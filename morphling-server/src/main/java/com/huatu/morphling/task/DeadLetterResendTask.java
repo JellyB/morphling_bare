@@ -113,7 +113,7 @@ public class DeadLetterResendTask {
             items.add(item);
         }
 
-        Set<String> to = userService.findByRole(2).stream()
+        Set<String> to = userService.findByRole(1).stream()
                 .map(u -> u.getEmail())
                 .filter(email -> StringUtils.isNotBlank(email))
                 .collect(Collectors.toSet());
