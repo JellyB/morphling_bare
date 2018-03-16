@@ -71,7 +71,7 @@ public class SimpleHealthCheckTask {
         envService.getEnvs().values().stream().filter(e -> e.isProd()).forEach(env -> {
             List<App> apps = appService.findByEnv(env.getKey());
             for (App app : apps) {
-                new CheckHealthTask(app).run();//直接运行，异步的情况下（有些出问题时候检查慢），导致邮件发好多封
+                new CheckHealthTask(app).run();
             }
         });
     }
@@ -106,7 +106,6 @@ public class SimpleHealthCheckTask {
 
                 String key = app.getName()+"$"+instance.getHost()+"$"+instance.getPort();
 
-                errorInfo="56565656";
                 if(errorInfo != null && warnLock.asMap().putIfAbsent(key,true) == null){ //五分钟内未报警
                     Map error = Maps.newHashMap();
                     error.put("host",instance.getHost());
@@ -139,7 +138,7 @@ public class SimpleHealthCheckTask {
 
                     MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
                     helper.setFrom(from);
-                    helper.setTo("55375829@qq.com");
+                    helper.setTo(to.stream().toArray(String[]::new));
                     helper.setSubject(app.getName()+" 健康检查报警");
                     helper.setText(content,true);
                     mailSender.send(message);
