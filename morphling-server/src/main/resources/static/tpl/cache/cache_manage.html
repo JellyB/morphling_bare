@@ -30,11 +30,34 @@
 
             </div>
         </div>
+        <ui-foo-table>
+            <div class="row wrapper-md">
+                当前选择节点：<span ng-if="instance" class="badge bg-success">{{instance.host}}:{{instance.port}}</span>
+            </div>
+            <div class="row m-b-lg">
+                <div class="col-md-12 " >
+                    <div class="row row-sm text-center">
+                        <div class="col-xs-3 col-md-2" ng-repeat="ck in caches" ng-if="ck.sourceType == 'GETINSIDE' || ck.sourceType == 'DELINSIDE'">
+                            <div href class="block padder-v item" style="border-radius: 10px"  ng-class="{'REDIS':'bg-success','GETINSIDE':'bg-dark','DELINSIDE':'bg-danger'}[ck.sourceType]">
+                                <span class="text-white font-thin h5 block">{{ck.name}}</span>
+                                <span class="text-muted text-xs">{{ck.sourceType}}</span>
+                                <span class="bottom text-right w-full">
+                            <i  class="fa  fa-database text-muted m-r-sm"></i>
+                        </span>
+                                <a class="top text-right w-full cusor-pointer btn-delete" ng-click="editCache(ck)">
+                                    <i class="fa fa-edit m-r-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui-foo-table>
 
         <div class="col-md-12 " >
             <div class="row row-sm text-center">
-                <div class="col-xs-3 col-md-2" ng-repeat="ck in caches">
-                    <div href class="block padder-v item" style="border-radius: 10px" ng-class="{'REDIS':'bg-success','GETINSIDE':'bg-dark','DELINSIDE':'bg-danger'}[ck.sourceType]">
+                <div class="col-xs-3 col-md-2" ng-repeat="ck in caches" ng-if="ck.sourceType != 'GETINSIDE' && ck.sourceType != 'DELINSIDE'">
+                    <div href class="block padder-v item" style="border-radius: 10px"  ng-class="{'REDIS':'bg-success','GETINSIDE':'bg-dark','DELINSIDE':'bg-danger'}[ck.sourceType]">
                         <span class="text-white font-thin h5 block">{{ck.name}}</span>
                         <span class="text-muted text-xs">{{ck.sourceType}}</span>
                         <span class="bottom text-right w-full">

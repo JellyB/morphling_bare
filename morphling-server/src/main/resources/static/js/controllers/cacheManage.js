@@ -8,6 +8,37 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
     $scope.appId = $stateParams.appId;
     $scope.redis = {};
 
+    var table = {
+        url:"/app/preview/"+$scope.appId+"/instances",
+        params:{checkRegist:true},
+        headers: [
+            {name:"名称",field:"clientName"},
+            {name:"地址",field:"host"},
+            {name:"版本",field:"currentVersion"},
+            {name:"状态",field:"status",compile:true,formatter:function(value,row){
+                if(value == 0){
+                    return "<span class='badge bg-dark'>待部署</span>"
+                }else if(value == 1){
+                    return "<span class='badge bg-success'>运行中</span>"
+                }else{
+                    return "<span class='badge bg-danger'>已停止</span>"
+                }
+            }},
+        ],
+        rowEvents:[{
+            class:'btn-primary',
+            name:"选择",
+            click:function(row){
+                $scope.instance = row;
+            }
+        }],
+        operationEvents:[],
+        settings:{
+            pagerHide:false
+        }
+    }
+    $scope.table = table;
+
 
     function loadApp(){
         appService.appPreview($scope.appId).then(function(response){
@@ -37,6 +68,10 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
 
 
     $scope.editCache = function(ck){
+        if(!$scope.instance && (ck.sourceType == 'GETINSIDE' || ck.sourceType == 'DELINSIDE')){
+            dbUtils.info("请先选择实例");
+            return;
+        }
         var instance = $modal.open({
             animation: true,
             templateUrl: 'tpl/cache/cache_edit.html',
@@ -45,7 +80,7 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
             backdrop: "static",
             resolve: {
                 source: function () {
-                    return {data:ck,appId:$scope.appId};
+                    return {data:ck,appId:$scope.appId,instanceId:$scope.instance ? $scope.instance.id : ''};
                 }
             }
         });
@@ -84,7 +119,6 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
     function CacheEditController($scope,$rootScope,$modalInstance,$compile,dbUtils,source,cacheService){
         $scope.cache = source.data;
         $scope.appId = source.appId;
-        console.log($scope.cache)
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
@@ -99,13 +133,15 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
                 }
                 data[params[i]['name']] = params[i]['value'];
             }
-            cacheService.getCache($scope.appId,$scope.cache.id,$scope.cache.sourceType,$scope.cache.cluster,data).then(function(response){
+            cacheService.getCache($scope.appId,$scope.cache.id,$scope.cache.sourceType,$scope.cache.cluster,source.instanceId,data).then(function(response){
                 if(!response.data){
                     $scope._cacheStr = undefined;
                     dbUtils.info("未查询到缓存","提示");
                     return;
                 }
+                console.log(response.data)
                 try{
+
                     $scope._cacheStr = dbUtils.toString(JSON.parse(response.data));
                 }catch(error){
                     $scope._cacheStr = response.data;

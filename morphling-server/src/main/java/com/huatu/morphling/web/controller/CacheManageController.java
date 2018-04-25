@@ -201,11 +201,24 @@ public class CacheManageController {
         return null;
     }
 
-    @PostMapping(value = "/{appId}/{cacheId}",params = "type=GETINSIDE")
-    public Object getInsideCache(@PathVariable int appId, @PathVariable int cacheId, HttpServletRequest request){
+    @PostMapping(value = "/{appId}/{cacheId}",params = {"type=GETINSIDE","type=DELINSIDE"})
+    public Object dealInsideCache(@PathVariable int appId, @PathVariable int cacheId, @RequestParam int instanceId,
+                                 @org.springframework.web.bind.annotation.RequestBody Map params,
+                                 HttpServletRequest request){
+        AppInstanceVO instance = appService.findInstanceByInstanceId(instanceId);
+        //目前getinside和delinside走的一样的处理流程，完全依赖spel，所以这里可以不用区分
+        String url = String.format(CacheManageConsts.CACHE_MANAGE_URL,instance.getHost(),instance.getPort(),instance.getContextPath(), CacheManageConsts.METHOD_GETINSIDE,cacheId);
+        RequestBody requestBody = RequestBody.create(MediaType.parse(org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE), JSON.toJSONString(params));
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(new Request.Builder().url(url.replace("//","/")).post(requestBody).build()).execute();
+            String responseStr = response.body().string();
+            return responseStr;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
-
 
 
     private JedisCommands getResource(Env.RedisDataSource redisDataSource){
