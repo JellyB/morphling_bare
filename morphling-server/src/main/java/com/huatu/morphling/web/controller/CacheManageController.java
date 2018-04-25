@@ -201,7 +201,7 @@ public class CacheManageController {
         return null;
     }
 
-    @PostMapping(value = "/{appId}/{cacheId}",params = {"type=GETINSIDE","type=DELINSIDE"})
+    @PostMapping(value = "/{appId}/{cacheId}")
     public Object dealInsideCache(@PathVariable int appId, @PathVariable int cacheId, @RequestParam int instanceId,
                                  @org.springframework.web.bind.annotation.RequestBody Map params,
                                  HttpServletRequest request){

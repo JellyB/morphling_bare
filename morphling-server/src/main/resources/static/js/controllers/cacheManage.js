@@ -161,7 +161,7 @@ app.controller('CacheManageController', ['$scope','$rootScope','$modal','$state'
                 }
                 data[params[i]['name']] = params[i]['value'];
             }
-            cacheService.delCache($scope.appId,$scope.cache.id,$scope.cache.sourceType,$scope.cache.cluster,data).then(function(response){
+            cacheService.delCache($scope.appId,$scope.cache.id,$scope.cache.sourceType,$scope.cache.cluster,source.instanceId,data).then(function(response){
                 if(response.code == SUCCESS_CODE){
                     dbUtils.success("删除成功","提示");
                 }
