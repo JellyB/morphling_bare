@@ -8,8 +8,8 @@ angular.module("app").service('CacheManageService', ['dbUtils', '$http', '$q', f
         getCache:function(appId,cacheId,type,clusterId,instanceId,data){
             return dbUtils.postBody("/cache/"+appId+"/"+cacheId+"?type="+type+"&clusterId="+clusterId+"&instanceId="+instanceId,data)
         },
-        delCache:function(appId,cacheId,type,clusterId,data){
-           return dbUtils.postBody("/cache/del/"+appId+"/"+cacheId+"?type="+type+"&clusterId="+clusterId,data)
+        delCache:function(appId,cacheId,type,clusterId,instanceId,data){
+           return dbUtils.postBody("/cache/del/"+appId+"/"+cacheId+"?type="+type+"&clusterId="+clusterId+"&instanceId="+instanceId,data)
         },
         dataSources:function(){
             return dbUtils.get("/cache/dataSources");
