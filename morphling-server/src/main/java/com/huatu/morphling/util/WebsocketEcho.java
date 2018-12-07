@@ -25,8 +25,9 @@ public class WebsocketEcho implements EchoFunction {
         }else{
             try {
                 session.sendMessage(new TextMessage(ANSIUtil.convertHtml(line)));
-            } catch (IOException e) {
-                log.error("",e);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("",e.getMessage());
             }
         }
     }
