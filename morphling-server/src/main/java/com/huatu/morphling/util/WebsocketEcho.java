@@ -24,7 +24,9 @@ public class WebsocketEcho implements EchoFunction {
             OperateLogHolder.append(logId,line);
         }else{
             try {
-                session.sendMessage(new TextMessage(ANSIUtil.convertHtml(line)));
+                if (line.indexOf("DatedRevTag") == -1 && line.indexOf("PersonIdent") == -1) {
+                    session.sendMessage(new TextMessage(ANSIUtil.convertHtml(line)));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error("",e.getMessage());
