@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         expressionInterceptUrlRegistry
-                .antMatchers("/auth/**")
+                .antMatchers("/auth/**","/degrade/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
